@@ -5,28 +5,7 @@ import User from 'App/Models/User'
 import { v1 as uuidv1 } from 'uuid'
 
 export default class UserTypesController {
-    public async create({ auth, request, response }) {
-        try {
-            await auth.use('api').authenticate()
-            let user = auth.use('api').user!
-            const users = await User.query().where('id', user.id).preload('userType')
-            user = users[0]
-            if (user!.userType.name !== 'Administrador') {
-                response.status(400)
-                response.send({
-                    code: "NOT_HAVE_PERMISSION",
-                    message: 'No tiene permiso para hacer esta operación',
-                })
-                return
-            }
-        } catch {
-            response.status(400)
-            response.send({
-                code: "INVALID_API_TOKEN",
-                message: 'Token no valido',
-            })
-            return
-        }
+    public async create({ request, response }) {
         const name = request.input('name')
         if (typeof name !== 'string') {
             response.status(400)
