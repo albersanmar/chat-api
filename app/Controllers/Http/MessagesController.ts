@@ -29,9 +29,9 @@ export default class MessagesController {
             data: { message: message }
         })
     }
-    public async find({ request, response }) {
-        const roomId = request.all().roomId
-        const messages = await Message.query().where('roomId', roomId).preload('user')
+    public async find({ /*request,*/ response }) {
+        // const roomId = request.all().roomId
+        const messages = await Message.query()// .where('roomId', roomId).preload('user')
         response.status(200)
         response.send({
             data: { messages: messages }

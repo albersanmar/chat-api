@@ -7,7 +7,7 @@ export default class UsersSchema extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.uuid('id').primary()
       table.string('name').nullable()
-      table.string('email', 255).notNullable()
+      // table.string('email', 255).notNullable()
       table.string('password', 180).notNullable()
       table.boolean('blocked').nullable().defaultTo(false)
       table.string('remember_me_token').nullable()
